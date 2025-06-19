@@ -17,7 +17,7 @@ async def oracle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(f"🔮 {message}")
 
 if name == '__main__':
-    app = ApplicationBuilder().token("ТВОЙ_ТОКЕН_ЗДЕСЬ").build()
+    app = ApplicationBuilder().token("7912585872:AAG9bdYKmlByt8W_sAomP0VEsJU_SdCL-MU").build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("oracle", oracle))
     app.run_polling()
