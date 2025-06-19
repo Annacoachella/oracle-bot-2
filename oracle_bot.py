@@ -1,7 +1,13 @@
+import os
 import json
 import random
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
+from dotenv import load_dotenv
+
+# Загружаем токен из .env
+load_dotenv()
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 # Загружаем карточки из файла
 with open("oracle_cards.json", encoding="utf-8") as f:
@@ -16,6 +22,11 @@ async def oracle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = random.choice(cards["общие"])
     await update.message.reply_text(f"🔮 {message}")
 
+if name == '__main__':
+    app = ApplicationBuilder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(CommandHandler("oracle", oracle))
+    app.run_polling()
 if name == '__main__':
     app = ApplicationBuilder().token("7912585872:AAG9bdYKmlByt8W_sAomP0VEsJU_SdCL-MU").build()
     app.add_handler(CommandHandler("start", start))
